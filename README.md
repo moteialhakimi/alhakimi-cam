@@ -1,2 +1,46 @@
-# alhakimi-cam
-Alhakimi Cam — a consent-based browser camera preview demo. Camera access requires the visitor's explicit browser permission; video stays on-device and is not recorded or uploaded.
+# الحكيمي كام | Alhakimi Cam
+
+أداة Python بسيطة لـTermux لعرض معاينة كاميرا **على جهازك وبموافقتك**. تعمل على `127.0.0.1` فقط، وتطلب إذن الكاميرا من المتصفح عند الضغط على زر التشغيل. لا تسجل ولا تحفظ ولا ترفع أي صورة أو فيديو.
+
+## التشغيل في Termux
+
+```bash
+pkg update
+pkg install python
+ git clone https://github.com/moteialhakimi/alhakimi-cam.git
+cd alhakimi-cam
+python alhakimi_cam.py
+```
+
+احذف المسافة قبل `git clone` إذا نسخت الأوامر مجتمعة؛ أو استخدم مباشرةً:
+
+```bash
+git clone https://github.com/moteialhakimi/alhakimi-cam.git
+```
+
+يفتح السكربت الصفحة عبر `termux-open-url` عند توفره. إذا لم تُفتح تلقائياً، افتح هذا العنوان يدوياً على الهاتف: `http://127.0.0.1:8765/`. اضغط **تشغيل المعاينة** وامنح الإذن من نافذة المتصفح إن أردت. لإيقاف الكاميرا اضغط **إيقاف**؛ ولإيقاف الخادم اضغط `Ctrl+C` في Termux.
+
+إذا كان المنفذ مشغولاً:
+
+```bash
+ALHAKIMI_CAM_PORT=8766 python alhakimi_cam.py
+```
+
+ثم افتح `http://127.0.0.1:8766/`.
+
+## الخصوصية والأمان
+
+- الخادم مربوط صراحةً بعنوان `127.0.0.1` ولا يفتح منفذاً على الشبكة.
+- الوصول للكاميرا لا يحدث إلا بعد ضغط الزر وموافقة المتصفح.
+- الصوت معطل؛ لا يوجد تسجيل أو التقاط صور أو رفع أو حسابات أو كلمات مرور.
+- لا تستخدم هذه الأداة للوصول إلى كاميرا شخص آخر. لا يمكن تشغيل الكاميرا خفية أو تجاوز إذن المتصفح.
+- لا تستخدم نفقاً عاماً أو إعداداً يعرّض الخادم للإنترنت.
+
+## المتطلبات
+
+Python 3 في Termux ومتصفح حديث يدعم `getUserMedia`. لا توجد حزم Python خارجية. الوصول إلى الكاميرا يعتمد على إذن Android/المتصفح؛ قد يلزم تفعيل إذن الكاميرا للمتصفح من إعدادات Android.
+
+## ملفات المشروع
+
+- `alhakimi_cam.py` — خادم محلي وصفحة معاينة HTML مضمّنة.
+- `LICENSE` — ترخيص MIT.
